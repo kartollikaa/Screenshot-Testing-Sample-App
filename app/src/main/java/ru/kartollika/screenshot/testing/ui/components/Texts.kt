@@ -13,6 +13,6 @@ fun Header(
   Text(
     modifier = modifier,
     text = text,
-    style = MaterialTheme.typography.headlineMedium
+    style = MaterialTheme.typography.bodyMedium
   )
 }
