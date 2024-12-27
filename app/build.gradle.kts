@@ -39,6 +39,11 @@ android {
   testOptions {
     unitTests {
       isIncludeAndroidResources = true
+
+      // Roborazzi recommends to enable hardware render mode to enable PixelCopy
+      all {
+        it.systemProperties["robolectric.pixelCopyRenderMode"] = "hardware"
+      }
     }
   }
 }
@@ -60,7 +65,17 @@ dependencies {
   androidTestImplementation(libs.androidx.ui.test.junit4)
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
-  testDebugImplementation(libs.androidx.ui.test.junit4)
+  testImplementation(libs.androidx.ui.test.junit4)
   testDebugImplementation(libs.roborazzi)
   testDebugImplementation(libs.robolectric)
+  testDebugImplementation(libs.sergioSastre.composablePreviewScanner)
+  testDebugImplementation(libs.roborazzi.compose.preview.scanner.support)
+}
+
+roborazzi {
+  generateComposePreviewRobolectricTests {
+    enable = true
+    packages = listOf("ru.kartollika.screenshot.testing.ui.components")
+    includePrivatePreviews = true
+  }
 }
