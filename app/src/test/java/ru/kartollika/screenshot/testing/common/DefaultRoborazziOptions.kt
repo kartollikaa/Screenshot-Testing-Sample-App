@@ -9,12 +9,16 @@ import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onRoot
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.github.takahirom.roborazzi.DefaultFileNameGenerator
+import com.github.takahirom.roborazzi.ExperimentalRoborazziApi
 import com.github.takahirom.roborazzi.InternalRoborazziApi
 import com.github.takahirom.roborazzi.RoborazziOptions
 import com.github.takahirom.roborazzi.RoborazziOptions.CompareOptions
 import com.github.takahirom.roborazzi.RoborazziOptions.RecordOptions
 import com.github.takahirom.roborazzi.captureRoboImage
+import com.github.takahirom.roborazzi.provideRoborazziContext
 import java.io.File
+
+private const val DefaultOutputDirectory = "src/test/screenshots"
 
 val DefaultRoborazziOptions =
   RoborazziOptions(
@@ -24,7 +28,10 @@ val DefaultRoborazziOptions =
     recordOptions = RecordOptions(resizeScale = 0.5),
   )
 
-@OptIn(InternalRoborazziApi::class) fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.recordScreenshot(
+@OptIn(InternalRoborazziApi::class, ExperimentalRoborazziApi::class)
+fun <A : ComponentActivity> AndroidComposeTestRule<ActivityScenarioRule<A>, A>.recordScreenshot(
+  screenshotName: String = File(DefaultFileNameGenerator.generateFilePath()).nameWithoutExtension,
+  outputDirectory: String = DefaultOutputDirectory,
   roborazziOptions: RoborazziOptions = DefaultRoborazziOptions,
   body: @Composable () -> Unit,
 ) {
@@ -38,7 +45,7 @@ val DefaultRoborazziOptions =
 
   this.onRoot()
     .captureRoboImage(
-      filePath = "src/test/screenshots/${File(DefaultFileNameGenerator.generateFilePath()).name}",
+      "$outputDirectory/$screenshotName.${provideRoborazziContext().imageExtension}",
       roborazziOptions = roborazziOptions,
     )
 }
