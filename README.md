@@ -17,5 +17,8 @@ I'll translate it to English a bit later
 ![image](https://github.com/user-attachments/assets/2ade982e-3e71-45e3-acd8-54ef3048db3a)
 
 ### TODO
+- [x] Add Roborazzi infrastructure
+- [x] Add self-written test for Roborazzi
+- [x] Autogenerate tests from Composable `@Preview`
 - [ ] Integrate with [Git LFS](https://git-lfs.com/)
 - [ ] Add on-device screenshot testing aka on emulator
