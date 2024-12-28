@@ -19,6 +19,7 @@ I'll translate it to English a bit later
 ### TODO
 - [x] Add Roborazzi infrastructure
 - [x] Add self-written test for Roborazzi
+- [x] Add Github Action workflow to run screenshot tests on CI
 - [x] Autogenerate tests from Composable `@Preview`
 - [ ] Integrate with [Git LFS](https://git-lfs.com/)
 - [ ] Add on-device screenshot testing aka on emulator
